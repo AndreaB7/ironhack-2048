@@ -52,6 +52,15 @@ function updateScore() {
   });
 }
 
+// Shows the game status
+function gameStatus() {
+  if (game.win()) {
+    document.getElementById("game-over").classList = "show-won";
+  } else if (game.lose()) {
+    document.getElementById("game-over").classList = "show-lost";
+  }
+}
+
 // Keydown listener callback to move the game
 function moveListeners(event) {
   var keys = [
@@ -74,6 +83,7 @@ function moveListeners(event) {
   resetTiles();
   renderTiles();
   updateScore();
+  gameStatus();
 }
 
 // Add listener `keydown` on document

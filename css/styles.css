@@ -44,13 +44,16 @@ h1 {
   position: relative;
 }
 
-#game-board {
+#game-board,
+#tile-container,
+#game-over {
   background: #3582b8;
   border-radius: 4px;
   padding: 10px;
 }
 
-#tile-container {
+#tile-container,
+#game-over {
   top: 0;
   position: absolute;
   padding: 10px;
@@ -117,3 +120,33 @@ h1 {
 .tile.val-512  { background: #000F35; }
 .tile.val-1024 { background: #000921; font-size: 50px; padding-top: 35px; }
 .tile.val-2048 { background: #009894; font-size: 50px; padding-top: 35px; }
+
+#game-over {
+  background: rgba(255, 255, 255, 0.7);
+  box-sizing: border-box;
+  color: #3582b8;
+  font-size: 40px;
+  font-weight: bold;
+  height: 620px;
+  padding-top: 200px;
+  text-align: center;
+  width: 622px;
+}
+
+#game-over p {
+  font-weight: normal;
+}
+
+#game-over.hide {
+  display: none;
+}
+
+#game-over .won,
+#game-over .lost {
+  display: none;
+}
+
+#game-over.show-won .won,
+#game-over.show-lost .lost {
+  display: inline;
+}

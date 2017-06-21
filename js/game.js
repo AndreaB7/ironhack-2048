@@ -206,6 +206,10 @@ Game2048.prototype.win = function() {
   return this.won;
 };
 
+Game2048.prototype.lose = function() {
+  return this.lost;
+};
+
 // Checks whether the game is lost
 Game2048.prototype._isGameLost = function() {
   // Return if there are still positions left - not lost
