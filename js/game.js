@@ -172,6 +172,14 @@ Game2048.prototype.moveUp = function() {
   return boardChanged;
 };
 
+// Transposes board matrix, moves to the right and transposes back
+Game2048.prototype.moveDown = function () {
+  this._transposeMatrix();
+  var boardChanged = this._moveRight();
+  this._transposeMatrix();
+  return boardChanged;
+};
+
 Game2048.prototype._equalArrays = function(arr1, arr2) {
   return (arr1.length == arr2.length) && arr1.every(function(element, index) {
     return element === arr2[index];
