@@ -30,3 +30,40 @@ function renderTiles() {
     });
   });
 }
+
+// Reset tiles
+function resetTiles() {
+  var tilesContainer = document.getElementById("tile-container");
+  var tiles          = tilesContainer.getElementsByClassName("tile");
+
+  // Clean up container by removing every child
+  Array.prototype.slice.call(tiles).forEach(function(tile) {
+    tilesContainer.removeChild(tile);
+  });
+}
+
+// Keydown listener callback to move the game
+function moveListeners(event) {
+  var keys = [
+    37, // Left
+    38, // Up
+    39, // Right
+    40  // Down
+  ];
+
+  // Ignore other keys
+  if (keys.indexOf(event.keyCode) < 0) return;
+
+  switch (event.keyCode) {
+    case 37: game.move("left");  break;
+    case 38: game.move("up");    break;
+    case 39: game.move("right"); break;
+    case 40: game.move("down");  break;
+  }
+
+  resetTiles();
+  renderTiles();
+}
+
+// Add listener `keydown` on document
+document.addEventListener("keydown", moveListeners);
