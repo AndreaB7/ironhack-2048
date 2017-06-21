@@ -112,6 +112,58 @@ Game2048.prototype.moveLeft = function() {
   return boardChanged;
 };
 
+// Moves each row to the right and merges if necessary
+Game2048.prototype.moveRight = function() {
+  // Keep new values in a new array
+  var newBoard = [];
+
+  // Store whether board has changed
+  var boardChanged = false;
+
+  var that = this;
+
+  // Loop through each row of the current board
+  that.board.forEach (function(row) {
+
+    // Store a newRow without null values
+    var newRow = row.filter(function(i) {
+      return i !== null;
+    });
+
+    // Loop through each value in a newRow from right to left and if adjacent
+    // value is equal to the current one, double the current value and
+    // set to null the adjacent value
+    for (i = newRow.length - 1; i > 0; i--) {
+      if (newRow[i-1] === newRow[i]) {
+        newRow[i]   = newRow[i] * 2;
+        newRow[i-1] = null;
+      }
+    }
+
+    // Store non-null values of a newRow in a mergedRow
+    var mergedRow = newRow.filter(function(i) {
+      return i !== null;
+    });
+
+    // Fill up mergedRow with remaining null values
+    while(mergedRow.length < 4) {
+      mergedRow.unshift(null);
+    }
+
+    // Set that board has changed if mergedRow is different from original row
+    if (!that._equalArrays(row, mergedRow)) {
+      boardChanged = true;
+    }
+
+    // Add the mergedRow to a new board and process the next row
+    newBoard.push(mergedRow);
+  });
+
+  // Finally re-assign to new board and return whether board has changed
+  this.board = newBoard;
+  return boardChanged;
+};
+
 Game2048.prototype._equalArrays = function(arr1, arr2) {
   return (arr1.length == arr2.length) && arr1.every(function(element, index) {
     return element === arr2[index];
