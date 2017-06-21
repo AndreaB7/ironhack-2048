@@ -52,3 +52,10 @@ Game2048.prototype._getAvailablePosition = function() {
   var randomPosition = Math.floor(Math.random() * emptyTiles.length);
   return emptyTiles[randomPosition];
 };
+
+// Renders the board in the console
+Game2048.prototype._renderBoard = function() {
+  this.board.forEach(function(row) {
+    console.log(row);
+  });
+};
