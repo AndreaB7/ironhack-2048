@@ -164,8 +164,26 @@ Game2048.prototype.moveRight = function() {
   return boardChanged;
 };
 
+// Transposes board matrix, moves to the left and transposes back
+Game2048.prototype.moveUp = function() {
+  this._transposeMatrix();
+  var boardChanged = this._moveLeft();
+  this._transposeMatrix();
+  return boardChanged;
+};
+
 Game2048.prototype._equalArrays = function(arr1, arr2) {
   return (arr1.length == arr2.length) && arr1.every(function(element, index) {
     return element === arr2[index];
   });
+};
+
+Game2048.prototype._transposeMatrix = function() {
+  for (var row = 0; row < 4; row++) {
+    for (var column = row+1; column < 4; column++) {
+      var temp = this.board[row][column];
+      this.board[row][column] = this.board[column][row];
+      this.board[column][row] = temp;
+    }
+  }
 };
