@@ -197,8 +197,16 @@ Game2048.prototype.move = function(direction) {
   }
 };
 
+Game2048.prototype.win = function() {
+  return this.won;
+};
+
 Game2048.prototype._updateScore = function(value) {
   this.score += value;
+
+  if (value === 2048) {
+    this.won = true;
+  }
 };
 
 Game2048.prototype._equalArrays = function(arr1, arr2) {
