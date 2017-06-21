@@ -42,6 +42,16 @@ function resetTiles() {
   });
 }
 
+// Updates game score
+function updateScore() {
+  var score          = game.score;
+  var scoreContainer = document.getElementsByClassName("js-score");
+
+  Array.prototype.slice.call(scoreContainer).forEach(function(span) {
+    span.innerHTML = score;
+  });
+}
+
 // Keydown listener callback to move the game
 function moveListeners(event) {
   var keys = [
@@ -63,6 +73,7 @@ function moveListeners(event) {
 
   resetTiles();
   renderTiles();
+  updateScore();
 }
 
 // Add listener `keydown` on document
