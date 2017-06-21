@@ -185,18 +185,20 @@ Game2048.prototype._moveDown = function () {
 
 // Moves to given direction and generates a new tile if board changed
 Game2048.prototype.move = function(direction) {
-  switch (direction) {
-    case "up":    boardChanged = this._moveUp();    break;
-    case "down":  boardChanged = this._moveDown();  break;
-    case "left":  boardChanged = this._moveLeft();  break;
-    case "right": boardChanged = this._moveRight(); break;
-  }
+  if (!this._gameFinished()) {
+    switch (direction) {
+      case "up":    boardChanged = this._moveUp();    break;
+      case "down":  boardChanged = this._moveDown();  break;
+      case "left":  boardChanged = this._moveLeft();  break;
+      case "right": boardChanged = this._moveRight(); break;
+    }
 
-  if (boardChanged) {
-    // if board changed, try to generate a new tile
-    this._generateTile();
-    // and check if the game is lost
-    this._isGameLost();
+    if (boardChanged) {
+      // if board changed, try to generate a new tile
+      this._generateTile();
+      // and check if the game is lost
+      this._isGameLost();
+    }
   }
 };
 
@@ -239,6 +241,10 @@ Game2048.prototype._isGameLost = function() {
     });
   });
   this.lost = isLost;
+};
+
+Game2048.prototype._gameFinished = function () {
+  return this.won || this.lost;
 };
 
 Game2048.prototype._updateScore = function(value) {
