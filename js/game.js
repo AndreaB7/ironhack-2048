@@ -193,12 +193,52 @@ Game2048.prototype.move = function(direction) {
   }
 
   if (boardChanged) {
+    // if board changed, try to generate a new tile
     this._generateTile();
+    // and check if the game is lost
+    this._isGameLost();
   }
 };
 
 Game2048.prototype.win = function() {
   return this.won;
+};
+
+// Checks whether the game is lost
+Game2048.prototype._isGameLost = function() {
+  // Return if there are still positions left - not lost
+  if (this._getAvailablePosition()) return;
+
+  var that   = this;
+  // By default, assume there are no moves left and game is lost
+  var isLost = true;
+
+  // Iterate over board array and pick the top, left, bottom and right
+  // cell values. If any of them is equal to the currently iterated cell,
+  // assume there is a move left (merge) and set isLost to false.
+  this.board.forEach(function(row, rowIndex) {
+    row.forEach(function(elem, colIndex) {
+      var current = that.board[rowIndex][colIndex];
+      var top, bottom, left, right;
+
+      if (that.board[rowIndex][colIndex - 1]) {
+        left = that.board[rowIndex][colIndex - 1];
+      }
+      if (that.board[rowIndex][colIndex + 1]) {
+        right = that.board[rowIndex][colIndex + 1];
+      }
+      if (that.board[rowIndex - 1]) {
+        top = that.board[rowIndex - 1][colIndex];
+      }
+      if (that.board[rowIndex + 1]) {
+        bottom = that.board[rowIndex + 1][colIndex];
+      }
+
+      if (current === top || current === bottom || current === left || current === right)
+        isLost = false;
+    });
+  });
+  this.lost = isLost;
 };
 
 Game2048.prototype._updateScore = function(value) {
