@@ -55,9 +55,8 @@ Game2048.prototype._getAvailablePosition = function() {
 
 // Renders the board in the console
 Game2048.prototype._renderBoard = function() {
-  this.board.forEach(function(row) {
-    console.log(row);
-  });
+  this.board.forEach(function(row) { console.log(row); });
+  console.log('Score: ' + this.score);
 };
 
 // Moves each row to the left and merges if necessary
@@ -85,6 +84,8 @@ Game2048.prototype._moveLeft = function() {
       if (newRow[i+1] === newRow[i]) {
         newRow[i]   = newRow[i] * 2;
         newRow[i+1] = null;
+
+        that._updateScore(newRow[i]);
       }
     }
 
@@ -137,6 +138,8 @@ Game2048.prototype._moveRight = function() {
       if (newRow[i-1] === newRow[i]) {
         newRow[i]   = newRow[i] * 2;
         newRow[i-1] = null;
+
+        that._updateScore(newRow[i]);
       }
     }
 
@@ -192,6 +195,10 @@ Game2048.prototype.move = function(direction) {
   if (boardChanged) {
     this._generateTile();
   }
+};
+
+Game2048.prototype._updateScore = function(value) {
+  this.score += value;
 };
 
 Game2048.prototype._equalArrays = function(arr1, arr2) {
