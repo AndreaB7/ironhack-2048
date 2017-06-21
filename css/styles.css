@@ -3,6 +3,30 @@
   width: 622px;
 }
 
+header {
+  padding-bottom: 40px;
+}
+
+h1 {
+  font-size: 80px;
+  letter-spacing: 2px;
+  text-align: right;
+  text-shadow: 0px 0px 10px rgba(255, 255, 255, 1);
+}
+
+#score {
+  background-color: #43a3e6;
+  border-radius: 3px;
+  box-shadow: 0px 0px 10px 0px rgba(143,133,117,1);
+  color: #fff;
+  font-size: 25px;
+  font-weight: 600;
+  height: 55px;
+  padding: 15px 25px;
+  text-align: center;
+  width: 80px;
+}
+
 #main {
   position: relative;
 }
