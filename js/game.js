@@ -185,6 +185,8 @@ Game2048.prototype._moveDown = function () {
 
 // Moves to given direction and generates a new tile if board changed
 Game2048.prototype.move = function(direction) {
+  ion.sound.play("branch_break");
+
   if (!this._gameFinished()) {
     switch (direction) {
       case "up":    boardChanged = this._moveUp();    break;
@@ -252,6 +254,7 @@ Game2048.prototype._gameFinished = function () {
 };
 
 Game2048.prototype._updateScore = function(value) {
+  ion.sound.play("tap");
   this.score += value;
 
   if (value === 2048) {

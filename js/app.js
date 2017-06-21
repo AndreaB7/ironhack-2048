@@ -1,6 +1,7 @@
 var game;
 
 window.onload = function() {
+  loadSounds();
   game = new Game2048();
   console.log("Game initialized");
 
@@ -84,6 +85,16 @@ function moveListeners(event) {
   renderTiles();
   updateScore();
   gameStatus();
+}
+
+function loadSounds() {
+  ion.sound({
+    sounds: [{name: "branch_break"}, {name: "tap"}],
+
+    path: "../lib/ion.sound-3.0.7/sounds/",
+    preload: true,
+    volume: 1.0
+  });
 }
 
 // Add listener `keydown` on document
