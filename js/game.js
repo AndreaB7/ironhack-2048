@@ -61,7 +61,7 @@ Game2048.prototype._renderBoard = function() {
 };
 
 // Moves each row to the left and merges if necessary
-Game2048.prototype.moveLeft = function() {
+Game2048.prototype._moveLeft = function() {
   // Keep new values in a new array
   var newBoard = [];
 
@@ -113,7 +113,7 @@ Game2048.prototype.moveLeft = function() {
 };
 
 // Moves each row to the right and merges if necessary
-Game2048.prototype.moveRight = function() {
+Game2048.prototype._moveRight = function() {
   // Keep new values in a new array
   var newBoard = [];
 
@@ -165,7 +165,7 @@ Game2048.prototype.moveRight = function() {
 };
 
 // Transposes board matrix, moves to the left and transposes back
-Game2048.prototype.moveUp = function() {
+Game2048.prototype._moveUp = function() {
   this._transposeMatrix();
   var boardChanged = this._moveLeft();
   this._transposeMatrix();
@@ -173,11 +173,25 @@ Game2048.prototype.moveUp = function() {
 };
 
 // Transposes board matrix, moves to the right and transposes back
-Game2048.prototype.moveDown = function () {
+Game2048.prototype._moveDown = function () {
   this._transposeMatrix();
   var boardChanged = this._moveRight();
   this._transposeMatrix();
   return boardChanged;
+};
+
+// Moves to given direction and generates a new tile if board changed
+Game2048.prototype.move = function(direction) {
+  switch (direction) {
+    case "up":    boardChanged = this._moveUp();    break;
+    case "down":  boardChanged = this._moveDown();  break;
+    case "left":  boardChanged = this._moveLeft();  break;
+    case "right": boardChanged = this._moveRight(); break;
+  }
+
+  if (boardChanged) {
+    this._generateTile();
+  }
 };
 
 Game2048.prototype._equalArrays = function(arr1, arr2) {
