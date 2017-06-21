@@ -68,3 +68,15 @@
 .tile.tile-position-3-1 { transform: translate(150px, 450px); }
 .tile.tile-position-3-2 { transform: translate(300px, 450px); }
 .tile.tile-position-3-3 { transform: translate(450px, 450px); }
+
+.tile.val-2    { background: #93d2ff; }
+.tile.val-4    { background: #4ab5ff; }
+.tile.val-8    { background: #289cef; }
+.tile.val-16   { background: #2a72a3; }
+.tile.val-32   { background: #105a86; }
+.tile.val-64   { background: #00548c; }
+.tile.val-128  { background: #004777; }
+.tile.val-256  { background: #002c4a; }
+.tile.val-512  { background: #000F35; }
+.tile.val-1024 { background: #000921; font-size: 50px; padding-top: 35px; }
+.tile.val-2048 { background: #009894; font-size: 50px; padding-top: 35px; }
